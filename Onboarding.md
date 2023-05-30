@@ -80,5 +80,5 @@
 
 [nuGetGallery]: https://www.nuget.org/packages "NuGet Gallery"
 
-[blogDemoRepo]: 
+[blogDemoRepo]: https://github.com/wolfByte125/MeselalOnboarding.git "Blog Demo App"
 <!-- FRONTEND -->
