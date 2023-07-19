@@ -54,7 +54,7 @@ namespace BlogDemo.Services.BlogPostServices
         public async Task<List<BlogPost>> GetBlogPosts()
         {
             var blogPosts = await _context.BlogPosts
-                .OrderByDescending(bp => bp.Id)
+                .OrderByDescending(bp => bp.UpdatedAt)
                 .ToListAsync();
 
             return blogPosts;
