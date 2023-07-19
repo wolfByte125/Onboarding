@@ -19,7 +19,7 @@
 ![Folder Structure][folderStructureScreenshot]
 
 1. Contexts
-    > Contains `classes` used to query and save instancesof our `entities`
+    > Contains `classes` used to query and save instances of our `entities`
 2. Controllers
     > Contains our `API`s that receive requests from users and finally send back the responses.
 3. DTOs
