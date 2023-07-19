@@ -62,7 +62,7 @@ export default function CreateBlog() {
 
   return (
     <div>
-      <div className="w-3/5 mx-auto">
+      <div className="w-3/5 mx-auto my-10">
         <Grid container spacing={2} className="px-6 py-3 my-5">
           <Grid
             item
