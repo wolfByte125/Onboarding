@@ -103,6 +103,36 @@
 
 ---
 
+<details>
+   <summary>Mobile App</summary>
+
+## Mobile App
+
+### Frameworks | Editors
+
+-- UNDER CONSTRUCTION --
+
+</details>
+
+---
+
+<details>
+   <summary>Github</summary>
+
+## Github
+
+[Github Docs][githubDocs]
+
+[Git Docs][gitDocs]
+
+[Conventional Commits][conventionalCommits]
+
+[Git Commands (Atlassian)][atlassianGitCommands]
+
+</details>
+
+---
+
 [Demo Project][blogDemoRepo] Repo
 
 <!-- LINK DEFINITIONS -->
@@ -130,3 +160,10 @@
 [frontendFolderStructure]: ./Frontend%20Folder%20Structure.png
 [traversyMediaYT]: https://www.youtube.com/@TraversyMedia "Traversy Media"
 [wdsYT]: https://www.youtube.com/@WebDevSimplified "Web Dev Simplified"
+
+<!-- GITHUB -->
+
+[githubDocs]: https://docs.github.com/en "Github Docs"
+[gitDocs]: https://git-scm.com/doc "Git Docs"
+[conventionalCommits]: https://www.conventionalcommits.org/en/v1.0.0/ "Conventional Commits For Teams"
+[atlassianGitCommands]: https://www.atlassian.com/git/glossary "Git Commands Atlassian"
