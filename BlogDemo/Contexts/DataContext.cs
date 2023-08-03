@@ -10,6 +10,8 @@ namespace BlogDemo.Contexts
 
         public DbSet<BlogPost> BlogPosts { get; set; }
 
+        public DbSet<User> Users { get; set; }  
+
         // OVERRIDE SAVE CHANGES ASYNC TO ADD AND UPDATE TIMESTAMPS
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

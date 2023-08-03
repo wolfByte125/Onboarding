@@ -1,4 +1,5 @@
 using BlogDemo.Services.BlogPostServices;
+using BlogDemo.Services.UserServices;
 
 namespace BlogDemo
 {
@@ -7,6 +8,7 @@ namespace BlogDemo
         public static void AddAppServices(this IServiceCollection services)
         {
             services.AddScoped<IBlogPostService, BlogPostService>();
+            services.AddScoped<IUserServices, UserServices>();
         }
     }
 }
