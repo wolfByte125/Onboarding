@@ -2,6 +2,7 @@
 using BlogDemo.Contexts;
 using BlogDemo.DTOs.BlogPostDTOs;
 using BlogDemo.DTOs.ReviewDTOs;
+using BlogDemo.DTOs.UserDTOs;
 using BlogDemo.Models;
 
 namespace Secretary_Job_Mgmt.Utils
@@ -16,10 +17,16 @@ namespace Secretary_Job_Mgmt.Utils
         }
         public AutoMapperProfile()
         {
+            // BLOG POST
             CreateMap<CreateBlogPostDTO, BlogPost>();
             CreateMap<UpdateBlogPostDTO, BlogPost>();
+
+            // REVIEW
             CreateMap<UpdateReviewDTO, Review>();
             CreateMap<AddReviewDTO, Review>();
+
+            // USER
+            CreateMap<AddUserDTOs, User>();
         }
     }
 }
