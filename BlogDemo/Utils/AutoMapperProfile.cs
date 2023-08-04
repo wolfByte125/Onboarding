@@ -27,6 +27,7 @@ namespace Secretary_Job_Mgmt.Utils
 
             // USER
             CreateMap<AddUserDTOs, User>();
+            CreateMap<UpdateUserDTO, User>();
         }
     }
 }

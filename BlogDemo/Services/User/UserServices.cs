@@ -24,28 +24,31 @@ namespace BlogDemo.Services.UserServices
             await _context.SaveChangesAsync();
             return UserInsert;
         }
-        public async Task<User> DeleteUser(int id, string name)
+        public async Task<User> DeleteUser(int id)
         {
-            var userDel = await _context.Users
-                .Where(bp => bp.Id == id && bp.FName == name )
-                .FirstOrDefaultAsync() ;
+            var userDel = await GetUser(id);
+
             if ( userDel == null ) { throw new KeyNotFoundException("User Not Found") ; }
+
             _context.Users.Remove(userDel);
             await _context.SaveChangesAsync();
             return userDel;
         }
-        public async Task<User> GetUser(int id, string name)
+        public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.
-                Where(bp => bp.Id == id && bp.FName == name).
+                Where(bp => bp.Id == id).
                 FirstOrDefaultAsync();
+
             if ( user == null ) { throw new KeyNotFoundException("User not Found"); }
 
             return user;
         }
-        public async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsers(string? name)
         {
             var user = await _context.Users.
+                Where(u => 
+                (name == null || u.FName == name)).
                 OrderByDescending(bp =>bp.UpdatedAt)
                 .ToListAsync();
             return user;

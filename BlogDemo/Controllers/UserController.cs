@@ -32,11 +32,11 @@ namespace BlogDemo.Controllers
         }
         // Remove a user
         [HttpDelete]
-        public async Task<ActionResult> DeleteUser(int id, string name)
+        public async Task<ActionResult> DeleteUser(int id)
         {
             try
             {
-                return Ok(await _userServices.DeleteUser(id, name));
+                return Ok(await _userServices.DeleteUser(id));
             }
             catch (Exception ex)
             {
@@ -45,11 +45,11 @@ namespace BlogDemo.Controllers
         }
         //Get a specific user
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetUser(int id, string name)
+        public async Task<ActionResult> GetUser(int id)
         {
             try
             {
-                return Ok(await _userServices.GetUser(id, name));
+                return Ok(await _userServices.GetUser(id));
             }
             catch (Exception ex)
             {
@@ -58,11 +58,11 @@ namespace BlogDemo.Controllers
         }
         //Get all users
         [HttpGet]
-        public async Task<ActionResult> GetUsers()
+        public async Task<ActionResult> GetUsers([FromQuery] string? name)
         {
             try
             {
-                return Ok(await _userServices.GetUsers());
+                return Ok(await _userServices.GetUsers(name));
             }
             catch (Exception ex)
             {
