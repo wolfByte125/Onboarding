@@ -9,7 +9,7 @@ namespace BlogDemo.Contexts
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<BlogPost> BlogPosts { get; set; }
-
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }  
 
         // OVERRIDE SAVE CHANGES ASYNC TO ADD AND UPDATE TIMESTAMPS

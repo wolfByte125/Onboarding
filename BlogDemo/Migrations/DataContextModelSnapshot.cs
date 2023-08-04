@@ -50,7 +50,7 @@ namespace BlogDemo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("BlogDemo.Models.User", b =>
