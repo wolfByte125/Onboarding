@@ -1,4 +1,6 @@
+using BlogDemo.Models;
 using BlogDemo.Services.BlogPostServices;
+using BlogDemo.Services.NewReviewServices;
 using BlogDemo.Services.ReviewServices;
 using BlogDemo.Services.UserServices;
 
@@ -11,6 +13,7 @@ namespace BlogDemo
             services.AddScoped<IBlogPostService, BlogPostService>();
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<INewReviewService, NewReviewService>();
         }
     }
 }
