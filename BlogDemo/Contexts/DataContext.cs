@@ -9,8 +9,8 @@ namespace BlogDemo.Contexts
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<BlogPost> BlogPosts { get; set; }
-        public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }  
+        public DbSet<Review> Reviews { get; set; }
 
         // OVERRIDE SAVE CHANGES ASYNC TO ADD AND UPDATE TIMESTAMPS
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

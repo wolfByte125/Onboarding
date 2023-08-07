@@ -44,6 +44,7 @@ namespace BlogDemo.Services.BlogPostServices
         {
             var blogPost = await _context.BlogPosts
                 .Where(bp => bp.Id == id)
+                .Include(bp => bp.Reviews)
                 .FirstOrDefaultAsync();
 
             if (blogPost == null) throw new KeyNotFoundException("Blog Post Not Found.");
@@ -54,6 +55,8 @@ namespace BlogDemo.Services.BlogPostServices
         public async Task<List<BlogPost>> GetBlogPosts()
         {
             var blogPosts = await _context.BlogPosts
+                .Include(bp => bp.Reviews)
+                    .ThenInclude(nr => nr.User)
                 .OrderByDescending(bp => bp.UpdatedAt)
                 .ToListAsync();
 
