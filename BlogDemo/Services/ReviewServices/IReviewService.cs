@@ -1,4 +1,5 @@
 ﻿using BlogDemo.DTOs.ReviewDTOs;
+using BlogDemo.DTOs.ReviewDTOs;
 using BlogDemo.Models;
 
 namespace BlogDemo.Services.ReviewServices
@@ -7,6 +8,7 @@ namespace BlogDemo.Services.ReviewServices
     {
         Task<Review> AddReview(AddReviewDTO reviewDTO);
         Task<Review> DeleteReview(int id);
+        Task<int> GetRatingAggregateForBlog(int blogId);
         Task<Review> GetReview(int id);
         Task<List<Review>> GetReviews();
         Task<Review> UpdateReview(UpdateReviewDTO updateReviewDTO);

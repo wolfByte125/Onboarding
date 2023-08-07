@@ -1,6 +1,6 @@
 using BlogDemo.Models;
 using BlogDemo.Services.BlogPostServices;
-using BlogDemo.Services.NewReviewServices;
+using BlogDemo.Services.ReviewServices;
 using BlogDemo.Services.ReviewServices;
 using BlogDemo.Services.UserServices;
 
@@ -11,9 +11,8 @@ namespace BlogDemo
         public static void AddAppServices(this IServiceCollection services)
         {
             services.AddScoped<IBlogPostService, BlogPostService>();
-            services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IUserServices, UserServices>();
-            services.AddScoped<INewReviewService, NewReviewService>();
+            services.AddScoped<IReviewService, ReviewService>();
         }
     }
 }

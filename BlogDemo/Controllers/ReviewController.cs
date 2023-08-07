@@ -1,4 +1,6 @@
 ﻿using BlogDemo.DTOs.ReviewDTOs;
+using BlogDemo.DTOs.ReviewDTOs;
+using BlogDemo.Services.ReviewServices;
 using BlogDemo.Services.ReviewServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,7 @@ namespace BlogDemo.Controllers
         {
             _reviewService = reviewService;
         }
+        
         [HttpPost]
         public async Task<ActionResult> AddReview(AddReviewDTO reviewDTO)
         {
@@ -26,6 +29,7 @@ namespace BlogDemo.Controllers
                 return this.ParseException(ex);
             }
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteReview(int id)
         {
@@ -33,11 +37,12 @@ namespace BlogDemo.Controllers
             {
                 return Ok(await _reviewService.DeleteReview(id));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return this.ParseException(ex);
             }
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetReview(int id)
         {
@@ -45,11 +50,10 @@ namespace BlogDemo.Controllers
             {
                 return Ok(await _reviewService.GetReview(id));
             }
-            catch(Exception ex)
-            {
-                return this.ParseException(ex); 
-            }
+            catch (Exception ex) {
+                return this.ParseException(ex); }
         }
+        
         [HttpGet]
         public async Task<ActionResult> GetReviews()
         {
@@ -62,19 +66,20 @@ namespace BlogDemo.Controllers
                 return this.ParseException(ex);
             }
         }
+        
         [HttpPut]
-        public async Task<ActionResult> UpdateReview(UpdateReviewDTO reviewDTO)
+        public async Task<ActionResult> UpdateReview(UpdateReviewDTO updateReviewDTO)
         {
             try
             {
-                return Ok(await _reviewService.UpdateReview(reviewDTO));
+                return Ok(await _reviewService.UpdateReview(updateReviewDTO));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return this.ParseException(ex); 
+                return this.ParseException(ex);
             }
         }
-        
+
 
 
     }

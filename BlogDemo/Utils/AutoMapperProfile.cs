@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BlogDemo.Contexts;
 using BlogDemo.DTOs.BlogPostDTOs;
-using BlogDemo.DTOs.NewReviewDTOs;
+using BlogDemo.DTOs.ReviewDTOs;
 using BlogDemo.DTOs.ReviewDTOs;
 using BlogDemo.DTOs.UserDTOs;
 using BlogDemo.Models;
@@ -22,12 +22,13 @@ namespace Secretary_Job_Mgmt.Utils
             CreateMap<CreateBlogPostDTO, BlogPost>();
             CreateMap<UpdateBlogPostDTO, BlogPost>();
 
-            // REVIEW
-            CreateMap<UpdateReviewDTO, Review>();
-            CreateMap<AddReviewDTO, Review>();
-
             // USER
             CreateMap<AddUserDTOs, User>();
+            CreateMap<UpdateUserDTO, User>();
+
+            // REVIEW
+            CreateMap<AddReviewDTO,  Review>();
+            CreateMap<UpdateReviewDTO,  Review>();
         }
     }
 }
