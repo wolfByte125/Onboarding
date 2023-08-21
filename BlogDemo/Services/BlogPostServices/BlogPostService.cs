@@ -2,6 +2,8 @@
 using BlogDemo.Contexts;
 using BlogDemo.DTOs.BlogPostDTOs;
 using BlogDemo.Models;
+using BlogDemo.Services.HelperServices;
+using BlogDemo.Services.TagService;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogDemo.Services.BlogPostServices
@@ -10,15 +12,23 @@ namespace BlogDemo.Services.BlogPostServices
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public BlogPostService(DataContext context, IMapper mapper)
+        private readonly ITagService _tagService;
+        private readonly IHelperService _helperService;
+
+        public BlogPostService(DataContext context, IMapper mapper, 
+            ITagService tagService, IHelperService helperService)
         {
             _context = context;
             _mapper = mapper;
+            _tagService = tagService;
+            _helperService = helperService;
         }
 
         public async Task<BlogPost> CreateBlogPost(CreateBlogPostDTO blogPostDTO)
         {
             var blogPost = _mapper.Map<BlogPost>(blogPostDTO);
+
+            blogPost.Tags = await TagExtraction(blogPostDTO.TagsCSV);
 
             _context.BlogPosts.Add(blogPost);
             await _context.SaveChangesAsync();
@@ -45,6 +55,7 @@ namespace BlogDemo.Services.BlogPostServices
             var blogPost = await _context.BlogPosts
                 .Where(bp => bp.Id == id)
                 .Include(bp => bp.Reviews)
+                .Include(bp => bp.Tags)
                 .FirstOrDefaultAsync();
 
             if (blogPost == null) throw new KeyNotFoundException("Blog Post Not Found.");
@@ -55,6 +66,7 @@ namespace BlogDemo.Services.BlogPostServices
         public async Task<List<BlogPost>> GetBlogPosts()
         {
             var blogPosts = await _context.BlogPosts
+                .Include(bp=>bp.Tags)
                 .Include(bp => bp.Reviews)
                     .ThenInclude(nr => nr.User)
                 .OrderByDescending(bp => bp.UpdatedAt)
@@ -67,16 +79,70 @@ namespace BlogDemo.Services.BlogPostServices
         {
             var blogPost = await _context.BlogPosts
                 .Where(bp => bp.Id == blogPostDTO.Id)
-                .FirstOrDefaultAsync();
+                .Include(bp => bp.Tags)
+                .FirstOrDefaultAsync()
+                ?? 
+                throw new KeyNotFoundException("Blog Post Not Found.");
 
-            if (blogPost == null) throw new KeyNotFoundException("Blog Post Not Found.");
+            List<string> tags = await _helperService.CSVExtract(blogPostDTO.TagsCSV);
 
             blogPost = _mapper.Map(blogPostDTO, blogPost);
+
+            blogPost.Tags = new();
+
+            blogPost.Tags = await TagExtraction(tags);
 
             _context.BlogPosts.Update(blogPost);
             await _context.SaveChangesAsync();
 
             return blogPost;
+        }
+
+        public async Task<List<Tag>> TagExtraction(string csv)
+        {
+            List<Tag> tags = new List<Tag>();
+
+            List<string> extracted = await _helperService.CSVExtract(csv);
+
+            extracted = MakeDistinct(extracted);
+
+            foreach (string tagName in extracted)
+            {
+               var tag = await _context.Tags
+                    .Where(t => t.Name.ToLower() == tagName.Trim().ToLower())
+                    .FirstOrDefaultAsync()
+                    ??
+                    await _tagService.CreateTag(tagName);
+                
+                tags.Add(tag);
+            }
+            
+            return tags;
+        }
+        
+        public async Task<List<Tag>> TagExtraction(List<string> tagsList)
+        {
+            List<Tag> tags = new List<Tag>();
+
+            tagsList = MakeDistinct(tagsList);
+
+            foreach (string tagName in tagsList)
+            {
+               var tag = await _context.Tags
+                    .Where(t => t.Name.ToLower() == tagName.Trim().ToLower())
+                    .FirstOrDefaultAsync()
+                    ??
+                    await _tagService.CreateTag(tagName);
+                
+                tags.Add(tag);
+            }
+            
+            return tags;
+        }
+
+        public List<string> MakeDistinct(List<string> stringList)
+        {
+            return  stringList.Distinct().ToList();
         }
     }
 }

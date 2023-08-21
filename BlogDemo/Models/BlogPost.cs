@@ -11,6 +11,7 @@ namespace BlogDemo.Models
         public string Body { get; set; } = string.Empty;
         public string Author { get; set; } = string.Empty;
         public List<Review> Reviews { get; set; } = new();
+        public List<Tag> Tags { get; set; } = new();
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

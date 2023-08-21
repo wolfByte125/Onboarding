@@ -11,6 +11,19 @@ namespace BlogDemo.Contexts
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<User> Users { get; set; }  
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<BlogPostTag> BlogPostTags { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BlogPost>()
+                .HasMany(c => c.Tags)
+                .WithMany(e => e.BlogPosts)
+                .UsingEntity<BlogPostTag>();
+        }
 
         // OVERRIDE SAVE CHANGES ASYNC TO ADD AND UPDATE TIMESTAMPS
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

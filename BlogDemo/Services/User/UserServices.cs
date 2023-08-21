@@ -48,7 +48,7 @@ namespace BlogDemo.Services.UserServices
         {
             var user = await _context.Users.
                 Where(u => 
-                (name == null || u.FName == name)).
+                (name == null || u.FullName == name)).
                 OrderByDescending(bp =>bp.UpdatedAt)
                 .ToListAsync();
             return user;
